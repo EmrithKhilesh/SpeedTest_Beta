@@ -90,9 +90,8 @@ class HomePage extends StatelessWidget {
                             },
                             onError:
                                 (String errorMessage, String speedTestError) {
-                                  print(errorMessage);
-
-                                },
+                              print(errorMessage);
+                            },
                           );
                         },
                         child: const Text("Test"),
@@ -115,7 +114,7 @@ class HomePage extends StatelessWidget {
                         LineChartData(
                           maxX: dataController.downloadData.length.toDouble(),
                           minX: 0,
-                          maxY: 10,
+                          maxY: dataController.maxDownloadSpeed.value + 5,
                           minY: 0,
                           lineBarsData: [
                             LineChartBarData(
@@ -151,7 +150,7 @@ class HomePage extends StatelessWidget {
                         LineChartData(
                           maxX: dataController.uploadData.length.toDouble(),
                           minX: 0,
-                          maxY: 1,
+                          maxY: dataController.maxUploadSpeed.value + 0.3,
                           minY: 0,
                           lineBarsData: [
                             LineChartBarData(

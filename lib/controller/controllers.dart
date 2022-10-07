@@ -12,38 +12,43 @@ class SpeedTestController extends GetxController {
   RxBool showUploadBool = false.obs;
   RxBool showdownloadBool = false.obs;
 
+  RxDouble maxDownloadSpeed = 0.0.obs;
+  RxDouble maxUploadSpeed = 0.0.obs;
+
   bool showDownloadGraph() {
     if (graphPointDataDownload.isNotEmpty) {
-      showdownloadBool.value = true;
-      return showdownloadBool.value;
+      return showdownloadBool.value = true;
     } else {
-      return showdownloadBool.value;
+      return showdownloadBool.value = false;
     }
   }
 
   bool showUploadGraph() {
     if (graphPointDataUpload.isNotEmpty) {
-      showUploadBool.value = true;
-      return showUploadBool.value;
+      return showUploadBool.value = true;
     } else {
-      return showUploadBool.value;
+      return showUploadBool.value = false;
     }
   }
 
   void addTolist(double data) {
     downloadData.add(data.toInt());
-    graphPointDataDownload.add(FlSpot(downloadData.length.toDouble() - 1, data));
+    graphPointDataDownload
+        .add(FlSpot(downloadData.length.toDouble() - 1, data));
+
+    if (data > maxDownloadSpeed.value) {
+      maxDownloadSpeed.value = data;
+    }
   }
 
   void addTolistUpload(double data) {
     uploadData.add(data.toInt());
+    
     graphPointDataUpload.add(FlSpot(uploadData.length.toDouble() - 1, data));
+    if (data > maxUploadSpeed.value) {
+      maxUploadSpeed.value = data;
+    }
   }
-
-  // void displaylist() {
-  //   for (var element in downloadData) {
-  //   }
-  // }
 
   void emptyList() {
     downloadData.clear();

@@ -58,7 +58,6 @@ class HomePage extends StatelessWidget {
                           isTesting.value = true; //?variable to enable button
                           dataController.emptyList();
                           final internetSpeed = InternetSpeed();
-
                           //todo DOWNLOAD LOGIC
                           var counter = 0;
                           internetSpeed.startDownloadTesting(

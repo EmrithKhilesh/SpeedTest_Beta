@@ -43,7 +43,7 @@ class SpeedTestController extends GetxController {
 
   void addTolistUpload(double data) {
     uploadData.add(data.toInt());
-    
+
     graphPointDataUpload.add(FlSpot(uploadData.length.toDouble() - 1, data));
     if (data > maxUploadSpeed.value) {
       maxUploadSpeed.value = data;
@@ -55,5 +55,7 @@ class SpeedTestController extends GetxController {
     uploadData.clear();
     graphPointDataDownload.clear();
     graphPointDataUpload.clear();
+    maxUploadSpeed.value = 0.0;
+    maxDownloadSpeed.value = 0.0;
   }
 }

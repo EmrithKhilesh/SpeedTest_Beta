@@ -5,6 +5,7 @@ import 'package:internet_speed/callbacks_enum.dart';
 
 import 'package:internet_speed/internet_speed.dart';
 import 'package:speed_test_beta/controller/controllers.dart';
+import 'package:dart_ping/dart_ping.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -16,7 +17,12 @@ class HomePage extends StatelessWidget {
 
     RxBool isTesting = false.obs;
 
-    RxString speedUnit = "".obs;
+    RxString speedUnitDownload = "".obs;
+    RxString speedUnitUpload = "".obs;
+
+    RxInt? pingINT = 0.obs;
+
+    // var pingObject;
 
     final dataController = Get.put(SpeedTestController());
 
@@ -31,7 +37,7 @@ class HomePage extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 35),
                   child: Obx(
                     () => Text(
-                      'Download speed: $transferRateRx $speedUnit',
+                      'Download speed: $transferRateRx $speedUnitDownload',
                       style: const TextStyle(
                         fontSize: 20,
                       ),
@@ -42,7 +48,7 @@ class HomePage extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 35),
                   child: Obx(
                     () => Text(
-                      'Upload speed: $transferRateRxUpload $speedUnit',
+                      'Upload speed: $transferRateRxUpload $speedUnitUpload',
                       style: const TextStyle(
                         fontSize: 20,
                       ),
@@ -54,16 +60,16 @@ class HomePage extends StatelessWidget {
                     if (!isTesting.value) {
                       return ElevatedButton(
                         //! Download Button
-                        onPressed: () {
+                        onPressed: () async {
                           isTesting.value = true; //?variable to enable button
                           dataController.emptyList();
                           final internetSpeed = InternetSpeed();
-                          //todo DOWNLOAD LOGIC
-                          var counter = 0;
+
+                          //TODO PING SERVER
                           internetSpeed.startDownloadTesting(
                             onDone: (double transferRate, SpeedUnit unit) {
                               // dataController.displaylist();
-                              speedUnit.value = unit.name;
+                              speedUnitUpload.value = unit.name;
                               //todo UPLOAD LOGIC
                               internetSpeed.startUploadTesting(
                                 onDone: (double transferRate, SpeedUnit unit) {
@@ -83,7 +89,7 @@ class HomePage extends StatelessWidget {
                             },
                             onProgress: (double percent, double transferRate,
                                 SpeedUnit unit) {
-                              counter = counter + 1;
+                              speedUnitDownload.value = unit.name;
                               transferRateRx.value = transferRate;
                               dataController.addTolist(transferRate);
                             },

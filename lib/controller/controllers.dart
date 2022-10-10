@@ -1,6 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:get/get.dart';
-import 'package:internet_speed/internet_speed.dart';
+import 'package:dart_ping/dart_ping.dart';
 
 class SpeedTestController extends GetxController {
   List<FlSpot> graphPointDataDownload = <FlSpot>[];
@@ -14,6 +14,7 @@ class SpeedTestController extends GetxController {
 
   RxDouble maxDownloadSpeed = 0.0.obs;
   RxDouble maxUploadSpeed = 0.0.obs;
+
 
   bool showDownloadGraph() {
     if (graphPointDataDownload.isNotEmpty) {

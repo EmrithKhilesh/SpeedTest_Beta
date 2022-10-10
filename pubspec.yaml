@@ -39,6 +39,7 @@ dependencies:
   internet_speed: ^0.0.5
   fl_chart: ^0.55.2
   speed_test_dart: ^1.0.4+1
+  dart_ping_ios: ^2.0.1
 
 dev_dependencies:
   flutter_test:

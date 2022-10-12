@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 Widget leftTitleWidgets(double value, TitleMeta meta) {
   const style = TextStyle(
@@ -51,5 +52,77 @@ Widget bottomTitleWidgets(double value, TitleMeta meta) {
     axisSide: meta.axisSide,
     space: 8.0,
     child: text,
+  );
+}
+
+ButtonStyle buttonstyle(RxBool isTesting) {
+  if (isTesting.value) {
+    return ButtonStyle(
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),
+          ),
+        ),
+        backgroundColor:
+            MaterialStateProperty.all(Color.fromARGB(255, 157, 88, 18)),
+        foregroundColor: MaterialStateProperty.all(
+          Color.fromARGB(255, 176, 176, 176),
+        ),
+        enableFeedback: true);
+  } else {
+    return ButtonStyle(
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),
+          ),
+        ),
+        backgroundColor: MaterialStateProperty.all(
+          Color(0xfffd8204),
+        ),
+        foregroundColor: MaterialStateProperty.all(
+          Colors.white.withOpacity(0.9),
+        ),
+        enableFeedback: true);
+  }
+}
+
+Padding testButtonChild(String textStr) {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Text(
+      textStr,
+      style: const TextStyle(fontSize: 30),
+    ),
+  );
+}
+
+FlBorderData borderData() {
+  return FlBorderData(
+    show: true,
+    border: Border.all(
+      color: const Color(0xff37434d),
+      width: 2,
+    ),
+  );
+}
+
+FlGridData gridData() {
+  return FlGridData(
+    show: true,
+    drawVerticalLine: true,
+    horizontalInterval: 4,
+    verticalInterval: 4,
+    getDrawingHorizontalLine: (value) {
+      return FlLine(
+        color: const Color(0xff37434d),
+        strokeWidth: 1,
+      );
+    },
+    getDrawingVerticalLine: (value) {
+      return FlLine(
+        color: const Color(0xff37434d),
+        strokeWidth: 1,
+      );
+    },
   );
 }
